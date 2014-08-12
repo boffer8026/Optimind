@@ -15,9 +15,10 @@ Add optimind.app to your hosts
 Export OPTIMIND_SITE env var 
 ----------------------------
 This will map to /home/vagrant/optimind-site on the vm.
-Make sure to adjust to be where the optimind-site repo is on your machine:
+**Make sure to adjust to be where the optimind-site repo is on your machine.**
+**Make sure to change ~/.profile to whatever shell you're using if not default mac os x.**
 
-`echo 'export OPTIMIND_SITE=~/Sites/optimind-site' >> ~/.profile`
+`echo 'export OPTIMIND_SITE=/your/path/to/optimind-site' >> ~/.profile`
 
 
 Start & auto-provision the box

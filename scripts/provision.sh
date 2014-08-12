@@ -1,7 +1,9 @@
 #!bin/bash
 
-# cd in and setup storage
+# cd into app directory
 cd $2
+
+# and setup storage
 mkdir -p app/storage/cache
 mkdir -p app/storage/guard
 mkdir -p app/storage/logs
@@ -39,4 +41,13 @@ ln -fs "/etc/nginx/sites-available/$1" "/etc/nginx/sites-enabled/$1"
 # restart
 service nginx restart
 service php5-fpm restart
+
+# symlink assets to public in dev
+cd $2/public
+ln -fs "../app/assets/images" "images"
+ln -fs "../app/assets/css" "css"
+ln -fs "../app/assets/js" "js"
+ln -fs "../app/assets/fonts" "fonts"
+
+
 
