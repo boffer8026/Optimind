@@ -26,6 +26,11 @@ Start & auto-provision the box
 `vagrant up`
 
 
+Run guard on local machine
+--------------------------
+`bundle install`
+`guard`
+
 Alias your shiny new vm!
 ------------------------
 `echo "alias devoptimind='ssh vagrant@127.0.0.1 -p 2222'" >> ~/.profile`

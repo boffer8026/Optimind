@@ -1,5 +1,9 @@
 #!bin/bash
 
+# set the local OPITMIND_SITE env
+echo 'export OPTIMIND_SITE=/home/vagrant/optimind-site' >> ~/.bashrc
+source ~/.bashrc
+
 # cd into app directory
 cd $2
 
@@ -49,7 +53,14 @@ ln -fs "../app/assets/css" "css"
 ln -fs "../app/assets/js" "js"
 ln -fs "../app/assets/fonts" "fonts"
 
+# install phpunit globally
 wget https://phar.phpunit.de/phpunit.phar
 chmod +x phpunit.phar
 sudo mv phpunit.phar /usr/local/bin/phpunit
+
+# install ruby so we can run guard asset watcher
+\curl -L https://get.rvm.io | bash -s stable --ruby
+source /home/vagrant/.rvm/scripts/rvm
+bundle install
+
 
