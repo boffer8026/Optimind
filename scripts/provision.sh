@@ -48,19 +48,25 @@ service php5-fpm restart
 
 # symlink assets to public in dev
 cd $2/public
-ln -fs "../app/assets/images" "images"
-ln -fs "../app/assets/css" "css"
-ln -fs "../app/assets/js" "js"
-ln -fs "../app/assets/fonts" "fonts"
+ln -nfs "../app/assets/images" "images"
+ln -nfs "../app/assets/css" "css"
+ln -nfs "../app/assets/js" "js"
+ln -nfs "../app/assets/fonts" "fonts"
 
 # install phpunit globally
 wget https://phar.phpunit.de/phpunit.phar
 chmod +x phpunit.phar
 sudo mv phpunit.phar /usr/local/bin/phpunit
 
-# install ruby so we can run guard asset watcher
-\curl -L https://get.rvm.io | bash -s stable --ruby
-source /home/vagrant/.rvm/scripts/rvm
-bundle install
+# make supervisor start on reboot
+sudo rm /etc/supervisor/conf.d/queue.conf
+sudo apt-get install --reinstall supervisor
+
+# copy supervisor queue config
+sudo cp /home/vagrant/optimind-site/config/supervisor/queue.conf /etc/supervisor/conf.d/queue.conf
+
+# start the supervisor config
+sudo supervisorctl reread
+sudo supervisorctl add queue
 
 

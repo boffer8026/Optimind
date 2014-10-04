@@ -11,6 +11,8 @@ keys:
 folders:
     - map: OPTIMIND_SITE
       to: /home/vagrant/optimind-site
+    - map: BEANSTALK_CONSOLE
+      to: /home/vagrant/beanstalk_console
 
 sites:
     - app: optimind.app

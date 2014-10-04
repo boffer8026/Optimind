@@ -1,4 +1,4 @@
-OptiMind Dev Environment 
+OptiMind Dev Environment
 ========================
 
 Grab the box
@@ -12,13 +12,19 @@ Add optimind.app to your hosts
 127.0.0.1  optimind.app
 
 
-Export OPTIMIND_SITE env var 
+Install beanstalkd console project
+----------------------------------
+composer create-project ptrofimov/beanstalk_console -s dev
+
+
+Export OPTIMIND_SITE env var
 ----------------------------
 This will map to /home/vagrant/optimind-site on the vm.
 **Make sure to adjust to be where the optimind-site repo is on your machine.**
 **Make sure to change ~/.profile to whatever shell you're using if not default mac os x.**
 
-`echo 'export OPTIMIND_SITE=/your/path/to/optimind-site' >> ~/.profile`
+`echo 'export OPTIMIND_SITE=/your/local/path/to/optimind-site' >> ~/.profile`
+`echo 'export BEANSTALK_CONSOLE=/your/local/path/to/beanstalk_console' >> ~/.profile`
 
 
 Start & auto-provision the box
