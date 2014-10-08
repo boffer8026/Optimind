@@ -59,8 +59,8 @@ chmod +x phpunit.phar
 sudo mv phpunit.phar /usr/local/bin/phpunit
 
 # make supervisor start on reboot
-sudo rm /etc/supervisor/conf.d/queue.conf
-sudo apt-get install --reinstall supervisor
+sudo cp /home/vagrant/optimind-site/config/supervisor/rc.local /etc/rc.local
+sudo chmod +x /etc/rc.local
 
 # copy supervisor queue config
 sudo cp /home/vagrant/optimind-site/config/supervisor/queue.conf /etc/supervisor/conf.d/queue.conf
@@ -68,5 +68,4 @@ sudo cp /home/vagrant/optimind-site/config/supervisor/queue.conf /etc/supervisor
 # start the supervisor config
 sudo supervisorctl reread
 sudo supervisorctl add queue
-
 
