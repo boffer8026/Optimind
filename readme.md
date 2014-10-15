@@ -1,15 +1,28 @@
 OptiMind Dev Environment
 ========================
 
+
 Grab the box
 ------------
-`vagrant box add laravel/homestead`
+`vagrant box add laravel/homestead --box-version 0.1.9`
 
 
 Add optimind.app to your hosts
 ------------------------------
 `vi /etc/hosts`
 127.0.0.1  optimind.app
+`dscacheutil -flushcache; sudo killall -HUP mDNSResponder`
+
+
+Install composer globally
+-------------------------
+curl -sS https://getcomposer.org/installer | php
+sudo mv composer.phar /bin/composer
+
+
+Install envoy globally
+----------------------
+composer global require "laravel/envoy=~1.0"
 
 
 Install beanstalkd console project
