@@ -4,6 +4,13 @@
 echo 'export OPTIMIND_SITE=/home/vagrant/optimind-site' >> ~/.bashrc
 source ~/.bashrc
 
+# make supervisor start on reboot
+sudo cp /home/vagrant/optimind-site/config/supervisor/rc.local /etc/rc.local
+sudo chmod +x /etc/rc.local
+
+# copy supervisor queue config
+sudo cp /home/vagrant/optimind-site/config/supervisor/queue.conf /etc/supervisor/conf.d/queue.conf
+
 # cd into app directory
 cd $2
 
@@ -58,14 +65,25 @@ wget https://phar.phpunit.de/phpunit.phar
 chmod +x phpunit.phar
 sudo mv phpunit.phar /usr/local/bin/phpunit
 
-# make supervisor start on reboot
-sudo cp /home/vagrant/optimind-site/config/supervisor/rc.local /etc/rc.local
-sudo chmod +x /etc/rc.local
+# install selenium server globally
+wget http://selenium-release.storage.googleapis.com/2.43/selenium-server-standalone-2.43.1.jar
+chmod +x selenium-server-standalone-2.43.1.jar
+sudo mv selenium-server-standalone-2.43.1.jar /usr/local/bin/selenium-server
 
-# copy supervisor queue config
-sudo cp /home/vagrant/optimind-site/config/supervisor/queue.conf /etc/supervisor/conf.d/queue.conf
+# install firefox for selenium
+sudo apt-get update
+sudo apt-get install firefox -y --no-install-recommends
 
-# start the supervisor config
+# install java so we can run selenium server
+sudo apt-get install xvfb openjdk-7-jre-headless -y --no-install-recommends
+
+# reread supervisor ctrl
 sudo supervisorctl reread
-sudo supervisorctl add queue
 
+if ps aux | grep "[X]vfb" > /dev/null
+then
+    echo "Selenium server already running"
+else
+    sudo supervisorctl start selenium
+    echo "Selenium server started"
+fi
