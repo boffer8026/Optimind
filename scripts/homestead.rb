@@ -55,12 +55,17 @@ class Homestead
         end
       end
     end
-    
+
     # # Install All The Configured Nginx Sites
     settings["sites"].each do |site|
       config.vm.provision "shell" do |s|
-        s.inline = "bash /vagrant/scripts/provision.sh $1 $2 $3 $4"
-        s.args = [site["app"], site["folder"], site["conf"], site["ssl"]]
+        s.inline = "bash /vagrant/scripts/provision.sh $1 $2 $3 $4 $5 $6"
+        s.args = [site["app"],
+                  site["folder"],
+                  site["devconf"],
+                  site["ssl"],
+                  site["testconf"],
+                  site["testdomain"]]
       end
     end
   end

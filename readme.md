@@ -1,17 +1,22 @@
 OptiMind Dev Environment
 ========================
 
-
 Grab the box
 ------------
 `vagrant box add laravel/homestead --box-version 0.1.9`
 
 
-Add optimind.app to your hosts
-------------------------------
+Add optimind dev urls to your hosts
+-----------------------------------
 `vi /etc/hosts`
-127.0.0.1  optimind.app
-`dscacheutil -flushcache; sudo killall -HUP mDNSResponder`
+
+# optimind vm
+192.168.10.10 optimind.app
+192.168.10.10 optimind.test
+192.168.10.10 optimind.workers
+127.0.0.1 optimind.queue
+
+`dscacheutil -flushcache;`
 
 
 Install composer globally
@@ -62,11 +67,16 @@ devoptimind
 
 Access the vm!
 --------------
-[http://optimind.app:8000](http://optimind.app:8000)
+[https://optimind.app/](https://optimind.app/)
 
-or
 
-[https://optimind.app:4443](https://optimind.app:4443) if you wanna be fancy ;)
+Watch your queues!
+------------------
+[http://optimind.workers/](http://optimind.workers/)
+
+# add server
+host: optimind.queue
+port: 11300
 
 
 If you need to reprovision:

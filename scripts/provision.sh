@@ -43,11 +43,13 @@ mkdir -p "/etc/nginx/ssl/$1"
 sudo cp "$4/$1.crt" "/etc/nginx/ssl/$1/$1.crt"
 sudo cp "$4/$1.key" "/etc/nginx/ssl/$1/$1.key"
 
-# copy nginx site conf
+# copy nginx site dev & test confs
 sudo cp $3 /etc/nginx/sites-available/$1
+sudo cp $5 /etc/nginx/sites-available/$6
 
 # symlink to sites-enabled
 ln -fs "/etc/nginx/sites-available/$1" "/etc/nginx/sites-enabled/$1"
+ln -fs "/etc/nginx/sites-available/$6" "/etc/nginx/sites-enabled/$6"
 
 # restart
 service nginx restart

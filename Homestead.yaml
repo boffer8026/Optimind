@@ -17,8 +17,10 @@ folders:
 sites:
     - app: optimind.app
       folder: /home/vagrant/optimind-site
-      conf: /home/vagrant/optimind-site/config/nginx/optimus-dev.conf
+      devconf: /home/vagrant/optimind-site/config/nginx/optimus-dev.conf
       ssl: /home/vagrant/optimind-site/config/ssl
+      testconf: /home/vagrant/optimind-site/config/nginx/optimus.testing.conf
+      testdomain: optimind.test
 
 variables:
     - key: LARAVEL_ENV
