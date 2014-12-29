@@ -61,6 +61,14 @@ ln -nfs "../app/assets/images" "images"
 ln -nfs "../app/assets/css" "css"
 ln -nfs "../app/assets/js" "js"
 ln -nfs "../app/assets/fonts" "fonts"
+ln -nfs "../app/assets/package/" "package"
+
+# install node, bower, gruntjs
+curl -sL https://deb.nodesource.com/setup | sudo bash -
+sudo apt-get install -y nodejs
+sudo npm install -g bower
+npm install
+bower install --config.interactive=false
 
 # install phpunit globally
 wget https://phar.phpunit.de/phpunit.phar
@@ -89,3 +97,5 @@ else
     sudo supervisorctl start selenium
     echo "Selenium server started"
 fi
+
+
